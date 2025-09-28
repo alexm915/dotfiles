@@ -1,3 +1,39 @@
+-- ==================== Auto-install lazy.nvim ====================
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+require("lazy").setup("plugins", { install = { missing = true } })
+
+-- Create a _machine_specific.vim file to adjust machine specific stuff.
+local home = vim.fn.expand("~/.config/nvim")
+local machine_file = home .. "/_machine_specific.lua"
+local default_file = home .. "/default_configs/_machine_specific_default.lua"
+
+if vim.fn.empty(vim.fn.glob(machine_file)) == 1 then
+    vim.fn.system({ "cp", default_file, machine_file })
+end
+
+dofile(machine_file)
+
+local ok, _ = pcall(dofile, machine_file)
+if not ok then
+    vim.notify("没有找到 _machine_specific.lua，已跳过", vim.log.levels.WARN)
+end
+
+
+
+
+-- ==================== Editor behavior and keymapping ====================
+
 --设置 leader 键为空格,leader键即normal下使用/,类似win键。
 vim.g.mapleader = " "
 
