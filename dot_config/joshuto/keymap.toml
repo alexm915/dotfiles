@@ -1,0 +1,15 @@
+[keys]
+q = "quit"
+h = "parent"
+l = "open"
+j = "down"
+k = "up"
+gg = "top"
+G = "bottom"
+yy = "copy_path"
+dd = "cut"
+pp = "paste"
+cw = "rename"
+dD = "delete"
+
+l = "open_in_terminal_command:nvim {file}"

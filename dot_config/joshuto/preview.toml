@@ -1,0 +1,17 @@
+# 关闭图片预览，只保留文本/代码/压缩包
+
+[[previewers]]
+mime = "text/*"
+command = "bat --style=plain --color=always --paging=never {file}"
+
+[[previewers]]
+mime = "application/json"
+command = "jq '.' {file}"
+
+[[previewers]]
+mime = "application/zip"
+command = "unzip -l {file}"
+
+[[previewers]]
+mime = "inode/directory"
+command = "ls --color=always -lh --group-directories-first {file}"
