@@ -1,24 +1,38 @@
+#!/usr/bin/env bash
 set -e
+
+# === 基础工具安装 ===
 sudo apt update
 sudo apt install -y zsh curl git neovim tmux cargo fzf silversearcher-ag btop lazygit
+
+# === apt库中没有，使用脚本或其他方式安装 ===
+#-- oh my zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#-- joshuto
 cargo install --git https://github.com/kamiyaa/joshuto.git --force
 
-
-# set default shell
-if [ "$SHELL" != "$(which zsh)" ]; then
-    chsh -s "$(which zsh)"
-else
-    echo "Your default shell is already zsh."
-fi
-
-# install chezmoi
+# === chezmoi ===
 if ! command -v chezmoi &> /dev/null; then
-    sh -c "$(curl -fsLS get.chezmoi.io)"
+    sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
 else
     echo "chezmoi already installed."
 fi
 
-# initialize dotfiles
+# == initialize dotfiles ===
 chezmoi init alexm915
 chezmoi apply
+
+# === Auto Setup Neovim ===
+if command -v nvim &> /dev/null; then
+    nvim --headless "+Lazy! sync" +qa
+else
+    echo "Neovim not found, skipping plugin sync."
+fi
+
+
+# == set zsh as default shell ===
+if [ "$SHELL" != "$(which zsh)" ]; then
+    sudo chsh -s "$(which zsh)" "$USER"
+else
+    echo "Your default shell is already zsh."
+fi
