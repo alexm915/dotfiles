@@ -18,8 +18,8 @@ else
     echo "chezmoi already installed."
 fi
 
-# == initialize dotfiles ===
-chezmoi init alexm915
+# === initialize dotfiles ===
+chezmoi init git@github.com:alexm915/dotfiles.git
 chezmoi apply
 
 # === Auto Setup Neovim ===
