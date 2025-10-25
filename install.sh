@@ -3,7 +3,7 @@ set -e
 
 # === 基础工具安装 ===
 sudo apt update
-sudo apt install -y zsh curl git neovim tmux cargo fzf silversearcher-ag btop lazygit
+sudo apt install -y zsh curl git neovim tmux cargo fzf silversearcher-ag btop lazygit fastfetch
 
 # === apt库中没有，使用脚本或其他方式安装 ===
 #-- oh my zsh

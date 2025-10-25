@@ -44,6 +44,7 @@ alias fz="nvim \$(fzf)"
 alias js='joshuto'
 alias ca='chezmoi apply'
 alias sz='source ~/.zshrc'
+alias f='fastfetch'
 
 # -- fzf
 export FZF_DEFAULT_OPTS='--bind=ctrl-t:top,change:top --bind ctrl-j:down,ctrl-k:up'
