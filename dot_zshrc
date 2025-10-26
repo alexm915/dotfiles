@@ -17,8 +17,8 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# ===== 智能补全 =====
 bindkey '^I' expand-or-complete
-# 更智能的补全菜单
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -30,7 +30,7 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 
-
+# ===== Alias and shorcuts =====
 alias ll='ls -lah'
 alias gs='git status'
 alias update='sudo apt update && sudo apt upgrade -y'
@@ -40,13 +40,14 @@ alias cmb="cmake --build build"
 alias cmr="cmake --build build && ./build/your_executable"
 alias cmc="rm -rf build/*"
 alias vim='nvim'
-alias fz="nvim \$(fzf)"
-alias js='joshuto'
-alias ca='chezmoi apply'
-alias sz='source ~/.zshrc'
+alias jst='joshuto'
+alias cza='chezmoi apply'
 alias f='fastfetch'
 
-# -- fzf
+alias fz="nvim \$(fzf)"
+
+
+# ===== fzf configs =====
 export FZF_DEFAULT_OPTS='--bind=ctrl-t:top,change:top --bind ctrl-j:down,ctrl-k:up'
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_COMPLETION_TRIGGER='\'

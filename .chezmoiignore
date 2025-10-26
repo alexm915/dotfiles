@@ -1,1 +1,31 @@
+=== chezmoi ===
 install.sh
+run_after_apply.sh
+
+=== neovim 自动生成文件 ===
+.config/nvim/lazy-lock.json
+.config/nvim/plugin/
+.config/nvim/.netrwhist
+
+=== zsh 自动生成文件 ===
+.zcompdump*
+.zsh_history
+.zsh_sessions/
+.cache/
+.lesshst
+
+=== tmux 临时文件 ===
+.tmux/resurrect/
+.tmux/plugins/tpm/.git/
+.tmux.conf.local
+
+=== system / 临时缓存 ===
+.DS_Store
+*.swp
+*.swo
+*.bak
+*.log
+
+=== Cargo & Rust 临时目录 ===
+/target/
+**/target/
