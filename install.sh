@@ -4,6 +4,7 @@ set -e
 # === 基础工具安装 ===
 sudo apt update -y
 sudo apt install -y zsh curl git neovim tmux cargo fzf silversearcher-ag btop lazygit fastfetch
+sudo apt install -y sudo apt install open-vm-tools
 sudo apt install -y build-essential cmake gdb
 
 # === apt库中没有，使用脚本或其他方式安装 ===
