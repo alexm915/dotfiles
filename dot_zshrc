@@ -44,6 +44,7 @@ alias vim='nvim'
 alias jst='joshuto'
 alias cza='chezmoi apply'
 alias f='fastfetch'
+alias lg='lazygit'
 
 alias fz="nvim \$(fzf)"
 
