@@ -12,7 +12,7 @@ return{
             require("lualine").setup({
                 options ={
                     icons_enabled =true,
-                    theme ="tokyonight",
+                    theme ="catppuccin",
                     componet_separators ={ left ="|", right="|"},
                     section_separators = { left = "", right = "" },
                     disabled_filetypes = { statusline = { "dashboard", "alpha" } },
