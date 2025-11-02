@@ -1,4 +1,4 @@
---- CMake Alias ---
+# --- CMake Alias ---
 alias cmg="cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
 alias cmb="cmake --build build"
 alias cmr="cmake --build build && ./build/your_executable"

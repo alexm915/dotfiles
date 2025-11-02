@@ -1,4 +1,4 @@
-======= fzf configs ======
+# ======= fzf configs ======
 
 export FZF_DEFAULT_OPTS='--bind=ctrl-t:top,change:top --bind ctrl-j:down,ctrl-k:up'
 export FZF_DEFAULT_COMMAND='fd'
