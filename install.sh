@@ -1,22 +1,35 @@
 #!/usr/bin/env bash
 set -e
 
-# === 基础工具安装 ===
+# ====== 基础工具安装 ======
 sudo apt update -y
-sudo apt install -y curl git cargo silversearcher-ag
+sudo apt install -y curl git zip unzip silversearcher-ag 
 sudo apt install -y zsh neovim tmux fzf btop fastfetch lazygit git-delta
 
 sudo apt install -y sudo apt install open-vm-tools
-sudo apt install -y build-essential cmake gdb
+sudo apt install -y podman
+sudo apt install -y build-essential cmake gdb clang lldb ninja-build
 
-# === apt库中没有，使用脚本或其他方式安装 ===
-#-- oh my zsh
+
+# ====== apt库中没有，使用脚本或其他方式安装 ======
+# --- Rust Toolchain ---
+if ! command -v rustup &>/dev/null; then
+    curl -sSf https://sh.rustup.rs | sh -s -- -y
+    source "$HOME/.cargo/env"
+else
+    rustup update
+    source "$HOME/.cargo/env"
+fi
+
+# --- oh my zsh ---
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-#-- joshuto
+
+# --- joshuto ---
 cargo install --git https://github.com/kamiyaa/joshuto.git --force
 
 
-# === chezmoi ===
+
+# ====== chezmoi ======
 if ! command -v chezmoi &> /dev/null; then
     sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
 else
@@ -24,12 +37,12 @@ else
 fi
 
 
-# === initialize dotfiles ===
+# ====== initialize dotfiles ======
 chezmoi init git@github.com:alexm915/dotfiles.git
 chezmoi apply
 
 
-# === Auto Setup Neovim ===
+# ====== Auto Setup Neovim ======
 if command -v nvim &> /dev/null; then
     nvim --headless "+Lazy! sync" +qa
 else
@@ -37,7 +50,7 @@ else
 fi
 
 
-# == set zsh as default shell ===
+# ===== set zsh as default shell ======
 if [ "$SHELL" != "$(which zsh)" ]; then
     sudo chsh -s "$(which zsh)" "$USER"
 else
