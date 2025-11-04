@@ -45,7 +45,6 @@ alias vim='nvim'
 alias jst='joshuto'
 alias cz='chezmoi'
 alias f='fastfetch'
-alias lg='lazygit'
 
 
 # ===== Function Alias =====
@@ -64,15 +63,15 @@ tm() {
         tmux new -s "$1"
     fi
 }
-
-# --- search charater and preview file---
-fif() {
-    if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-        rg --files-with-matches --no-messages "$1" | \
-            fzf --preview "highlight -O ansi -l {} 2>/dev/null | \
-            rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || \
-            rg --ignore-case --pretty --context 10 '$1' {}"
+#---lazygit 
+function lazygit_widget(){
+    lazygit
+    zle reset-prompt
 }
+zle -N lazygit_widget
+bindkey '^g' lazygit_widget
+
+
 
 # ======= fzf configs ======
 export FZF_DEFAULT_OPTS='--bind=ctrl-t:top,change:top --bind ctrl-j:down,ctrl-k:up'
@@ -85,6 +84,14 @@ find-in-file() {
 }
 zle -N find-in-file
 bindkey '^f' find-in-file
+# --- search charater and preview file---
+fif() {
+    if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+        rg --files-with-matches --no-messages "$1" | \
+            fzf --preview "highlight -O ansi -l {} 2>/dev/null | \
+            rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || \
+            rg --ignore-case --pretty --context 10 '$1' {}"
+}
 
 
 
