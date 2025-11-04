@@ -1,14 +1,104 @@
-# ====== Theme Instant Prompt Must Be Top ======
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# ====== Source Zim ======
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+#--Auto Download Modules/Plugins
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
 fi
+# --Auto Install Modules/Plugins
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+    source ${ZIM_HOME}/zimfw.zsh init
+fi
+#--Initialize modules.
+source ${ZIM_HOME}/init.zsh
 
 
-# ====== Load Zsh Configs ======
-for config_file in ~/.zsh.d/*.zsh; do
-    source "$config_file"
-done
 
-# ====== Activate autocomplete and highlight, config at plugins ======
-autoload -Uz compinit
-compinit -u   # -u选项跳过安全检查加快启动速度
+# ====== Environment & PATH ======
+export LANG=en_US.UTF-8
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+path=(
+    $HOME/bin
+    /usr/local/bin
+    $HOME/.cargo/bin
+    $HOME/.local/bin
+    $path
+)
+
+
+# ====== Alias ======
+# --- CMake Alias ---
+alias cmg="cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
+alias cmb="cmake --build build"
+alias cmr="cmake --build build && ./build/your_executable"
+alias cmc="rm -rf build/*"
+
+# --- fzf Alias ---
+alias fz="nvim \$(fzf)"
+# --- Other Alias ---
+alias update='sudo apt update && sudo apt upgrade -y'
+alias ll='ls -lah'
+
+alias vim='nvim'
+alias jst='joshuto'
+alias cz='chezmoi'
+alias f='fastfetch'
+alias lg='lazygit'
+
+
+# ===== Function Alias =====
+#--- tmux ---
+tm() {
+    if [ -z "$1" ]; then
+        echo "Usage: tm <session_name>"
+        return 1
+    fi
+
+    [ -n "$TMUX" ] && unset tmux
+
+    if tmux has-session -t "$1" 2>/dev/null; then
+        tmux attach -t "$1"
+    else
+        tmux new -s "$1"
+    fi
+}
+
+# --- search charater and preview file---
+fif() {
+    if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+        rg --files-with-matches --no-messages "$1" | \
+            fzf --preview "highlight -O ansi -l {} 2>/dev/null | \
+            rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || \
+            rg --ignore-case --pretty --context 10 '$1' {}"
+}
+
+# ======= fzf configs ======
+export FZF_DEFAULT_OPTS='--bind=ctrl-t:top,change:top --bind ctrl-j:down,ctrl-k:up'
+export FZF_DEFAULT_COMMAND='fd'
+export FZF_TMUX=1
+export FZF_TMUX_HEIGHT='80%'
+# ---Custom fzf shortcuts
+find-in-file() {
+    grep --line-buffered --color=never -r "" * | fzf
+}
+zle -N find-in-file
+bindkey '^f' find-in-file
+
+
+
+
+# ====== Enable Vim Mode ======
+bindkey -v
+bindkey -M viins 'jk' vi-cmd-mode
+
+function zle-keymap-select {
+    if [[ $KEYMAP == vicmd ]]; then
+        echo -ne '\e[1 q'  # 方块光标
+    else
+        echo -ne '\e[5 q'  # 线形光标
+    fi
+}
+zle -N zle-keymap-select
+echo -ne '\e[5 q' # 初始化光标状态

@@ -1,0 +1,17 @@
+# ====== Zim Modules/Plugins ======
+zmodule environment
+zmodule input
+zmodule completion
+zmodule utility
+zmodule git
+zmodule fzf
+
+# ====== Prompt enhancement ======
+zmodule duration-info
+zmodule git-info
+zmodule prompt-pwd
+#--Theme
+zmodule magicmace
+
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-autosuggestions
