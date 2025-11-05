@@ -6,7 +6,6 @@ sudo apt update -y
 sudo apt install -y curl git zip unzip silversearcher-ag 
 sudo apt install -y zsh neovim tmux fzf btop fastfetch lazygit git-delta
 
-sudo apt install -y sudo apt install open-vm-tools
 sudo apt install -y podman
 sudo apt install -y build-essential cmake gdb clang lldb ninja-build
 
@@ -21,10 +20,10 @@ else
     source "$HOME/.cargo/env"
 fi
 
-# --- oh my zsh ---
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# --- zimfw ---
+curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 
-# --- joshuto ---
+# --- Yazi ---
 cargo install --git https://github.com/kamiyaa/joshuto.git --force
 
 
