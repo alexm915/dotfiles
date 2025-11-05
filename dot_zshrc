@@ -109,3 +109,5 @@ function zle-keymap-select {
 }
 zle -N zle-keymap-select
 echo -ne '\e[5 q' # 初始化光标状态
+
+KEYTIMEOUT=1
