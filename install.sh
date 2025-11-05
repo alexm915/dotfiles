@@ -24,7 +24,6 @@ fi
 curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 
 # --- Yazi ---
-cargo install --git https://github.com/kamiyaa/joshuto.git --force
 
 
 
