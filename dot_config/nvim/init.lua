@@ -57,8 +57,8 @@ vim.opt.termguicolors = true
 
 --键位Shorcuts
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
-vim.keymap.set('n', 'U', '5k', { noremap = true, silent = true })
-vim.keymap.set('n', 'D', '5j', { noremap = true, silent = true })
+vim.keymap.set('n', 'K', '5k', { noremap = true, silent = true })
+vim.keymap.set('n', 'J', '5j', { noremap = true, silent = true })
 vim.keymap.set('n', 'Q', ':q<CR>', { noremap = true, silent = true, desc="用Q来退出"})
 vim.keymap.set('n', '=', 'nzz', { noremap = true, silent = true, desc="=搜索结果上翻并居中"})
 vim.keymap.set('n', '-', 'Nzz', { noremap = true, silent = true })
