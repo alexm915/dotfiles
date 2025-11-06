@@ -1,14 +1,12 @@
 gui:
   theme:
-    lightTheme: false
     activeBorderColor:
-      - yellow
+      - green
       - bold
     inactiveBorderColor:
-      - blue
+      - default
     selectedLineBgColor:
       - reverse
-    showIcons: true
     nerdFontsVersion: 3
     mouseEvents: false
     border: rounded
@@ -16,7 +14,7 @@ gui:
 git:
   autoFetch: true
   log:
-    showGraph: true
+    showGraph: always
   paging:
     colorArg: always
     pager: delta --paging=never
