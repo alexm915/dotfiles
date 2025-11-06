@@ -24,6 +24,9 @@ fi
 curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 
 # --- Yazi ---
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup update
+cargo install --force --git https://github.com/sxyazi/yazi.git yazi-build
 
 
 
