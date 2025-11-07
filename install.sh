@@ -4,10 +4,10 @@ set -e
 # ====== 基础工具安装 ======
 sudo apt update -y
 sudo apt install -y curl git zip unzip silversearcher-ag trash-cli tree
-sudo apt install -y zsh neovim tmux fzf btop fastfetch lazygit git-delta
+sudo apt install -y zsh neovim tmux fzf ripgrep btop fastfetch lazygit git-delta
 
 sudo apt install -y podman
-sudo apt install -y build-essential cmake gdb clang lldb ninja-build
+sudo apt install -y build-essential cmake gdb clangd lldb ninja-build
 
 
 # ====== apt库中没有，使用脚本或其他方式安装 ======
