@@ -40,6 +40,7 @@ alias fz="nvim \$(fzf)"
 # --- Other Alias ---
 alias update='sudo apt update && sudo apt upgrade -y'
 alias ll='ls -lah'
+alias mkd='mkdir -p'
 
 alias vim='nvim'
 alias jst='joshuto'
