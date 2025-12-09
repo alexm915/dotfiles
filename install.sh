@@ -1,59 +1,46 @@
 #!/usr/bin/env bash
 set -e
 
-# ====== 基础工具安装 ======
-sudo apt update -y
-sudo apt install -y curl git zip unzip silversearcher-ag trash-cli tree
-sudo apt install -y zsh neovim tmux fzf ripgrep btop fastfetch lazygit git-delta
+# ====== basic tools ======
+sudo pacman -Syu --noconfirm
+sudo pacman -S --noconfirm man-db base-devel curl git zip unzip the_silver_searcher trash-cli tree
+sudo pacman -S --noconfirm zsh neovim tmux fzf ripgrep btop fastfetch lazygit git-delta
+sudo pacman -S --noconfirm cmake gdb clang lldb ninja
+sudo pacman -S --noconfirm chezmoi Yazi
 
-sudo apt install -y podman
-sudo apt install -y build-essential cmake gdb clangd lldb ninja-build
+# ====== config git ======
+git config --global user.name "alex"
+git config --global user.email "thealbertmak@gmail.com"
+git config --global init.defaultBranch main
 
-
-# ====== apt库中没有，使用脚本或其他方式安装 ======
-# --- Rust Toolchain ---
-if ! command -v rustup &>/dev/null; then
-    curl -sSf https://sh.rustup.rs | sh -s -- -y
-    source "$HOME/.cargo/env"
+# ====== zimfw ======
+if [ ! -d "$HOME/.zim" ]; then
+    echo "Installing zimfw..."
+    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 else
-    rustup update
-    source "$HOME/.cargo/env"
+    echo "zimfw already installed."
 fi
 
-# --- zimfw ---
-curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
-
-# --- Yazi ---
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-rustup update
-cargo install --force --git https://github.com/sxyazi/yazi.git yazi-build
-
-
-
-# ====== chezmoi ======
-if ! command -v chezmoi &> /dev/null; then
-    sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
+# ====== Set zsh as default shell ======
+if [ "$SHELL" != "$(which zsh)" ]; then
+    echo "Setting zsh as default shell..."
+    chsh -s "$(which zsh)"
 else
-    echo "chezmoi already installed."
+    echo "Your default shell is already zsh."
 fi
-
-
-# ====== initialize dotfiles ======
-chezmoi init git@github.com:alexm915/dotfiles.git
-chezmoi apply
-
 
 # ====== Auto Setup Neovim ======
-if command -v nvim &> /dev/null; then
+if command -v nvim &>/dev/null; then
+    echo "Syncing Neovim plugins..."
     nvim --headless "+Lazy! sync" +qa
 else
     echo "Neovim not found, skipping plugin sync."
 fi
 
-
-# ===== set zsh as default shell ======
-if [ "$SHELL" != "$(which zsh)" ]; then
-    sudo chsh -s "$(which zsh)" "$USER"
+# ====== initialize dotfiles ======
+if [ ! -d "$HOME/.local/share/chezmoi" ]; then
+    chezmoi init git@github.com:alexm915/dotfiles.git
+    chezmoi apply
 else
-    echo "Your default shell is already zsh."
+    echo "chezmoi already initialized."
 fi
