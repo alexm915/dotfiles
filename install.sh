@@ -3,10 +3,10 @@ set -e
 
 # ====== basic tools ======
 sudo pacman -Syu --noconfirm
-sudo pacman -S --noconfirm man-db base-devel curl git zip unzip the_silver_searcher trash-cli tree
-sudo pacman -S --noconfirm zsh neovim tmux fzf ripgrep btop fastfetch lazygit git-delta
-sudo pacman -S --noconfirm cmake gdb clang lldb ninja
-sudo pacman -S --noconfirm chezmoi yazi
+sudo pacman -S --needed --noconfirm man-db base-devel curl git zip unzip the_silver_searcher trash-cli tree
+sudo pacman -S --needed --noconfirm zsh neovim tmux fzf ripgrep btop fastfetch lazygit git-delta
+sudo pacman -S --needed --noconfirm cmake gdb clang lldb ninja
+sudo pacman -S --needed --noconfirm chezmoi yazi
 
 # ====== config git ======
 git config --global user.name "alex"
