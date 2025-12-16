@@ -30,6 +30,8 @@ path=(
 # ====== Alias ======
 alias ll='ls -lah'
 alias mkdir='mkdir -p'
+alias rm='echo "Please use trash-put to delete a file."; false'
+# use "\rm" instead of "rm" delete command
 
 alias vim='nvim'
 alias cz='chezmoi'
