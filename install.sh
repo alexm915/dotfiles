@@ -5,7 +5,7 @@ set -e
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm man-db base-devel curl git zip unzip the_silver_searcher trash-cli tree
 sudo pacman -S --needed --noconfirm zsh neovim tmux fzf ripgrep btop fastfetch lazygit git-delta
-sudo pacman -S --needed --noconfirm cmake gdb clang lldb ninja
+sudo pacman -S --needed --noconfirm cmake gdb clang lldb ninja podman
 sudo pacman -S --needed --noconfirm chezmoi yazi
 
 # ====== config git ======
