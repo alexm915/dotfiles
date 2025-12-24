@@ -32,10 +32,13 @@ alias ll='ls -lah'
 alias mkdir='mkdir -p'
 alias rm='echo "Please use trash-put to delete a file."; false'
 # use "\rm" instead of "rm" delete command
+alias tp="trash-put"
 
 alias vim='nvim'
 alias cz='chezmoi'
 alias f='fastfetch'
+alias tmux='echo "use tm"; false'
+alias tmx='echo "use tm"; false'
 
 
 # ===== Function Alias =====
