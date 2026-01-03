@@ -8,6 +8,15 @@ sudo pacman -S --needed --noconfirm zsh neovim tmux fzf ripgrep btop fastfetch l
 sudo pacman -S --needed --noconfirm cmake gdb clang lldb ninja podman
 sudo pacman -S --needed --noconfirm chezmoi yazi
 
+
+# ====== config yazi ======
+ya pkg add yazi-rs/plugins:full-border
+ya pkg add yazi-rs/plugins:git
+ya pkg add Rolv-Apneseth/starship
+ya pkg add KKV9/compress
+ya pkg add h-hg/yamb
+ya pkg add imsi32/yatline
+
 # ====== config git ======
 git config --global user.name "alex"
 git config --global user.email "thealbertmak@gmail.com"

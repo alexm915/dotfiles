@@ -37,8 +37,6 @@ alias tp="trash-put"
 alias vim='nvim'
 alias cz='chezmoi'
 alias f='fastfetch'
-alias tmux='echo "use tm"; false'
-alias tmx='echo "use tm"; false'
 
 
 # ===== Function Alias =====
