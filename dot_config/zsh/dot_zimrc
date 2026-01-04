@@ -1,0 +1,15 @@
+zmodule environment
+zmodule completion
+
+zmodule git
+zmodule utility
+zmodule duration-info
+zmodule git-info
+zmodule prompt-pwd
+
+zmodule fzf
+zmodule input
+zmodule magicmace
+
+zmodule zsh-users/zsh-autosuggestions
+zmodule zsh-users/zsh-syntax-highlighting
