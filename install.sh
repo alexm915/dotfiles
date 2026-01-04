@@ -23,17 +23,13 @@ git config --global user.email "thealbertmak@gmail.com"
 git config --global init.defaultBranch main
 
 # ====== zimfw ======
-if [ ! -d "$HOME/.zim" ]; then
-    echo "Installing zimfw..."
-    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
-else
-    echo "zimfw already installed."
-fi
+curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 
 # ====== Set zsh as default shell ======
 if [ "$SHELL" != "$(which zsh)" ]; then
     echo "Setting zsh as default shell..."
     chsh -s "$(which zsh)"
+    exec zsh
 else
     echo "Your default shell is already zsh."
 fi
