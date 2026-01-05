@@ -22,6 +22,10 @@ git config --global user.name "alex"
 git config --global user.email "thealbertmak@gmail.com"
 git config --global init.defaultBranch main
 
+
+# ====== config tmux ======
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/
+
 # ====== zimfw ======
 curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 
