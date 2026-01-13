@@ -62,8 +62,6 @@ alias rm='echo "Use tp (trash-put) instead."; false'
 alias tp="trash-put"
 
 # tools
-alias vim='nvim'
-alias vi='nvim'
 alias cz='chezmoi'
 alias f='fastfetch'
 alias sz="exec zsh"
@@ -73,13 +71,23 @@ alias sz="exec zsh"
 # ==================== Functions ====================
 
 # 使用tm创建tmuxsession
-tm() {
+function tm {
     if [ -z "$1" ]; then
         tmux attach || tmux new-session
     else
         tmux attach -t "$1" || tmux new-session -s "$1"
     fi
 }
+
+# vim and automatically tmux
+function vim {
+    if [ -n "$TMUX" ]; then
+        nvim "$@"
+    else
+        tmux new-session -A -s edit nvim "$@"
+    fi
+}
+
 
 # ctrl+g打开lazygit
 lazygit_widget(){
