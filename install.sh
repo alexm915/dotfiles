@@ -9,12 +9,6 @@ sudo pacman -S --needed --noconfirm cmake gdb clang lldb ninja podman
 sudo pacman -S --needed --noconfirm chezmoi yazi
 
 # ====== yay ======
-mkdir -p $HOME/tmp & cd ~$HOME/tmp
-git clone https://aur.achlinux.org/yay.git
-cd yay
-makepkg -sic --noconfirm
-cd ~$HOME/tmp & rm -rf yay
-
 command -v yay >/dev/null || (
     mkdir -p "${HOME}/tmp" &&
     cd "${HOME}/tmp" &&

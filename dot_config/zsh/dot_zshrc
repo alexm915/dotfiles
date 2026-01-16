@@ -98,7 +98,7 @@ function tm {
 }
 
 # vim and automatically tmux
-function vim {
+function v {
     if [ -n "$TMUX" ]; then
         nvim "$@"
     else
