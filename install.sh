@@ -8,6 +8,24 @@ sudo pacman -S --needed --noconfirm zsh neovim tmux fzf ripgrep btop fastfetch l
 sudo pacman -S --needed --noconfirm cmake gdb clang lldb ninja podman
 sudo pacman -S --needed --noconfirm chezmoi yazi
 
+# ====== yay ======
+mkdir -p $HOME/tmp & cd ~$HOME/tmp
+git clone https://aur.achlinux.org/yay.git
+cd yay
+makepkg -sic --noconfirm
+cd ~$HOME/tmp & rm -rf yay
+
+command -v yay >/dev/null || (
+    mkdir -p "${HOME}/tmp" &&
+    cd "${HOME}/tmp" &&
+    rm -rf yay &&
+    git clone https://aur.archlinux.org/yay.git &&
+    cd yay &&
+    makepkg -sic --noconfirm &&
+    cd "${HOME}" &&
+    rm -rf "${HOME}/tmp/yay"
+)
+
 
 # ====== config yazi ======
 ya pkg add yazi-rs/plugins:full-border
