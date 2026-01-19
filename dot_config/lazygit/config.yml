@@ -10,15 +10,13 @@ gui:
     nerdFontsVersion: 3
     mouseEvents: false
     border: rounded
-
 git:
   autoFetch: true
   log:
     showGraph: always
-  paging:
-    colorArg: always
-    pager: delta --paging=never
-
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never
 keybinding:
   universal:
     quit: 'q'
