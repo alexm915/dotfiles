@@ -86,10 +86,19 @@ alias sz="exec zsh"
 alias mt="nvim ~/.config/tmux/tmux.conf"
 alias at="chezmoi add ~/.config/tmux/tmux.conf"
 alias tls="tmux ls"
-
+# 2-neovim
+alias mv="nvim ~/.config/nvim/init.lua"
+alias av="chezmoi ~/.config/nvim"
+# 3-yazi
+alias my="nvim ~/.config/yazi/yazi.toml"
+alias ay="chezmoi add ~/.config/yazi"
+# 4-lazygit
+alias mg="nvim ~/.config/lazygit/config.yml"
+alias ag="chezmoi add ~/.config/lazygit/config.yml"
 
 # tools
 alias f='fastfetch'
+alias cz='chezmoi'
 
 
 
