@@ -74,19 +74,17 @@ alias qu='pacman -Qu'
 
 # file system
 alias ll='ls -lah'
-alias mkdir='mkdir -p'
+alias md='mkdir -p'
 alias rm='echo "Use tp (trash-put) instead."; false'
 alias tp="trash-put"
 # zsh
-alias vzsh="nvim ~/.config/zsh/.zshrc"
-alias azsh="chezmoi add ~/.config/zsh/.zshrc"
-alias rzsh="exec zsh"
+alias mz="nvim ~/.config/zsh/.zshrc"
+alias az="chezmoi add ~/.config/zsh/.zshrc"
+alias sz="exec zsh"
 
 
 # tools
-alias cz='chezmoi'
 alias f='fastfetch'
-alias sz="exec zsh"
 
 
 
