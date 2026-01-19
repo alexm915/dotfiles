@@ -77,10 +77,15 @@ alias ll='ls -lah'
 alias md='mkdir -p'
 alias rm='echo "Use tp (trash-put) instead."; false'
 alias tp="trash-put"
-# zsh
+
+# 0-zsh
 alias mz="nvim ~/.config/zsh/.zshrc"
 alias az="chezmoi add ~/.config/zsh/.zshrc"
 alias sz="exec zsh"
+# 1-tmux
+alias mt="nvim ~/.config/tmux/tmux.conf"
+alias at="chezmoi add ~/.config/tmux/tmux.conf"
+alias tls="tmux ls"
 
 
 # tools
