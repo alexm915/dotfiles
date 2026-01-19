@@ -99,6 +99,7 @@ alias ag="chezmoi add ~/.config/lazygit/config.yml"
 # tools
 alias f='fastfetch'
 alias cz='chezmoi'
+alias czl='chezmoi managed'
 
 
 
