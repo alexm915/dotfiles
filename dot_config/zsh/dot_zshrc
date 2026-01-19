@@ -77,6 +77,10 @@ alias ll='ls -lah'
 alias mkdir='mkdir -p'
 alias rm='echo "Use tp (trash-put) instead."; false'
 alias tp="trash-put"
+# zsh
+alias vzsh="nvim ~/.config/zsh/.zshrc"
+alias azsh="chezmoi add ~/.config/zsh/.zshrc"
+alias rzsh="exec zsh"
 
 
 # tools
@@ -108,7 +112,7 @@ function v {
 
 
 # ctrl+g打开lazygit
-lazygit_widget(){
+function lazygit_widget {
     lazygit
     zle reset-prompt
 }
