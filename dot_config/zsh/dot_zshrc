@@ -65,7 +65,7 @@ alias yayi='yay -S --needed'
 
 alias pacr='sudo pacman -Rns'
 alias pacc='sudo pacman -Sc'
-alias paca='sudo pacman -Rns $(pacman -Qdtq)'
+alias pacca='sudo pacman -Rns $(pacman -Qdtq)'
 
 alias qs='pacman -Qs'
 alias qi='pacman -Qi'
