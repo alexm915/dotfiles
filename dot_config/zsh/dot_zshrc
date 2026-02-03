@@ -55,17 +55,17 @@ source ${ZIM_HOME}/init.zsh
 
 # ==================== Alias ====================
 # pacman & yay
-alias pu='sudo pacman -Syu'
+alias pacu='sudo pacman -Syu'
 
-alias ps='pacman -Ss'
-alias ys='yay -Ss'
+alias pacs='pacman -Ss'
+alias yays='yay -Ss'
 
-alias pi='sudo pacman -S --needed'
-alias yi='yay -S --needed'
+alias paci='sudo pacman -S --needed'
+alias yayi='yay -S --needed'
 
-alias pr='sudo pacman -Rns'
-alias pc='sudo pacman -Sc'
-alias pca='sudo pacman -Rns $(pacman -Qdtq)'
+alias pacr='sudo pacman -Rns'
+alias pacc='sudo pacman -Sc'
+alias paca='sudo pacman -Rns $(pacman -Qdtq)'
 
 alias qs='pacman -Qs'
 alias qi='pacman -Qi'
@@ -77,6 +77,31 @@ alias ll='ls -lah'
 alias md='mkdir -p'
 alias rm='echo "Use tp (trash-put) instead."; false'
 alias tp="trash-put"
+alias cdw="cd ~/files/work/"
+
+
+# devbox
+# 0-monitor
+alias lpm="lsipc -m" #查看共享内存
+alias lps="lsipc -s" #查看信号量
+#查看进程
+function psg {
+    local pat=$1
+    [[ -z $pat ]] && {
+        echo "usage: psg <process-name-or-pattern>"
+        return 1
+    }
+
+    local -a pids
+    pids=($(pgrep -f "$pat")) || {
+        echo "no process matched: $pat"
+        return 1
+    }
+
+    ps -fp $pids
+}
+
+
 
 # 0-zsh
 alias mz="nvim ~/.config/zsh/.zshrc"
@@ -95,6 +120,7 @@ alias ay="chezmoi add ~/.config/yazi"
 # 4-lazygit
 alias mg="nvim ~/.config/lazygit/config.yml"
 alias ag="chezmoi add ~/.config/lazygit/config.yml"
+
 
 # tools
 alias f='fastfetch'
