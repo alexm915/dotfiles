@@ -22,6 +22,37 @@ require("lazy").setup("plugins", { install = { missing = true } })
 
 -- ==================== Editor behavior and keymapping ====================
 
+--Auto Save afterDelay
+vim.opt.updatetime = 300
+local autosave_group = vim.api.nvim_create_augroup("AutoSaveAfterDelay", {
+    clear = true,
+})
+
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    group = autosave_group,
+    callback = function()
+        if vim.bo.modified
+            and vim.bo.modifiable
+            and vim.bo.buftype == ""
+            and vim.fn.expand("%") ~= "" then
+                vim.cmd("silent! write")
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+    group = autosave_group,
+    callback = function()
+        if vim.bo.modified
+            and vim.bo.modifiable
+            and vim.bo.buftype == ""
+            and vim.fn.expand("%") ~= "" then
+                vim.cmd("silent! write")
+        end
+    end,
+})
+
+
 
 --缩进
 vim.opt.tabstop = 4

@@ -107,13 +107,15 @@ function psg {
 alias mz="nvim ~/.config/zsh/.zshrc"
 alias az="chezmoi add ~/.config/zsh/.zshrc"
 alias sz="exec zsh"
+alias mzm="nvim ~/.config/zsh/.zimrc"
+alias azm="chezmoi add ~/.config/zsh/.zimrc"
 # 1-tmux
 alias mt="nvim ~/.config/tmux/tmux.conf"
 alias at="chezmoi add ~/.config/tmux/tmux.conf"
 alias tls="tmux ls"
 # 2-neovim
 alias mv="nvim ~/.config/nvim/init.lua"
-alias av="chezmoi ~/.config/nvim"
+alias av="chezmoi add ~/.config/nvim/init.lua"
 # 3-yazi
 alias my="nvim ~/.config/yazi/yazi.toml"
 alias ay="chezmoi add ~/.config/yazi"
