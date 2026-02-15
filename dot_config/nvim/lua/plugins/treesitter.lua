@@ -1,4 +1,4 @@
---语法高亮
+--Language-Highlight
 return{
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate',
     config = function()

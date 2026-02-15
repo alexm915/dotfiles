@@ -1,16 +1,16 @@
--- 自动补全
+-- Auto-completion Option
 return{
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-        "hrsh7th/cmp-nvim-lsp", -- LSP 补全源
-        "hrsh7th/cmp-buffer", -- 缓冲区补全源
-        "hrsh7th/cmp-path", -- 路径补全源
-        "L3MON4D3/LuaSnip", -- 片段引擎
-        "saadparwaiz1/cmp_luasnip", -- LuaSnip 补全源
-        "hrsh7th/cmp-cmdline", -- 命令行补全源
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "L3MON4D3/LuaSnip",
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-cmdline",
     },
-    event = { "InsertEnter", "CmdlineEnter" }, -- 触发补全的时机
+    event = { "InsertEnter", "CmdlineEnter" },
     config = function()
         local cmp =require("cmp")
         local luasnip =require("luasnip")
@@ -22,14 +22,14 @@ return{
                 end,
             },
             sources =cmp.config.sources({
-                { name = "nvim_lsp", max_item_count = 15 }, -- LSP 补全
-                { name = "luasnip", max_item_count = 10 }, -- 代码片段
-                { name = "buffer", max_item_count = 10 }, -- 缓冲区
-                { name = "path", max_item_count = 5 }, -- 路径
+                { name = "nvim_lsp", max_item_count = 15 },
+                { name = "luasnip", max_item_count = 10 },
+                { name = "buffer", max_item_count = 10 },
+                { name = "path", max_item_count = 5 },
             }),
             mapping =cmp.mapping.preset.insert({
-                ["<C-n>"] = cmp.mapping.select_next_item(), -- 下一个补全项
-                ["<C-p>"] = cmp.mapping.select_prev_item(), -- 上一个补全项
+                ["<C-n>"] = cmp.mapping.select_next_item(),
+                ["<C-p>"] = cmp.mapping.select_prev_item(),
                 ["<C-b>"] = cmp.mapping.scroll_docs(-4), -- 向上滚动文档
                 ["<C-f>"] = cmp.mapping.scroll_docs(4), -- 向下滚动文档
                 ["<C-Space>"] = cmp.mapping.complete(), -- 手动触发补全
