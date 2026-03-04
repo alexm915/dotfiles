@@ -7,6 +7,10 @@ sudo pacman -S --needed --noconfirm man-db base-devel curl git zip unzip the_sil
 sudo pacman -S --needed --noconfirm zsh neovim tmux fzf ripgrep htop fasefetch lazygit git-delta
 sudo pacman -S --needed --noconfirm cmake make ninjia gdb clang llvm lldb bear podman
 sudo pacman -S --needed --noconfirm chezmoi yazi
+# --- vibe coding
+sudo pacman -S --needed --noconfirm nodejs npm
+sudo npm install -g @anthropic-ai/claude-code
+
 
 # ====== yay ======
 command -v yay >/dev/null || (
