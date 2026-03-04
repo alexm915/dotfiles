@@ -70,6 +70,10 @@ vim.opt.termguicolors = true
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 vim.keymap.set('n', 'K', '5k', { noremap = true, silent = true })
 vim.keymap.set('n', 'J', '5j', { noremap = true, silent = true })
+
+vim.keymap.set('n', 'H', '^', { noremap = true, silent = true })
+vim.keymap.set('n', 'L', '$', { noremap = true, silent = true })
+
 vim.keymap.set('n', 'Q', ':q<CR>', { noremap = true, silent = true, desc="用Q来退出"})
 vim.keymap.set('n', '=', 'nzz', { noremap = true, silent = true, desc="=搜索结果上翻并居中"})
 vim.keymap.set('n', '-', 'Nzz', { noremap = true, silent = true })
