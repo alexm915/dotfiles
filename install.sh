@@ -4,8 +4,8 @@ set -e
 # ====== basic tools ======
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm man-db base-devel curl git zip unzip the_silver_searcher trash-cli tree
-sudo pacman -S --needed --noconfirm zsh neovim tmux fzf ripgrep htop fasefetch lazygit git-delta
-sudo pacman -S --needed --noconfirm cmake make ninjia gdb clang llvm lldb bear podman
+sudo pacman -S --needed --noconfirm zsh neovim tmux fzf ripgrep htop fastfetch lazygit git-delta
+sudo pacman -S --needed --noconfirm cmake make ninja gdb clang llvm lldb bear podman
 sudo pacman -S --needed --noconfirm chezmoi yazi
 # --- vibe coding
 sudo pacman -S --needed --noconfirm nodejs npm
