@@ -6,16 +6,19 @@ return{
         event = "VeryLazy",
         config = function()
             local function time()
-                return os.date("%H:%M:%S")
+                return os.date("%H:%M")
             end
 
             require("lualine").setup({
                 options ={
                     icons_enabled =true,
                     theme ="catppuccin",
-                    componet_separators ={ left ="|", right="|"},
-                    section_separators = { left = "", right = "" },
-                    disabled_filetypes = { statusline = { "dashboard", "alpha" } },
+                    component_separators = { left = " ", right = " " },
+                    section_separators = { left = "", right = "" },
+                    disabled_filetypes = {
+                        statusline = { "dashboard", "alpha" },
+                        winbar = {},
+                    },
                     always_divide_middle = true,
                     globalstatus = true,
                 },
@@ -36,7 +39,6 @@ return{
                     lualine_z ={},
                 },
                 tabline ={},
-                winbar ={},
                 inactive_winbar ={},
                 extensions ={ "nvim-tree"},
             })
