@@ -79,6 +79,9 @@ install_yay() {
   rm -rf "${HOME}/tmp/yay"
 }
 
+#============================================================================
+# Install Arch packages.
+#============================================================================
 install_arch_packages() {
   info 'Installing Arch Linux packages...'
   sudo pacman -Syu --noconfirm
@@ -93,6 +96,7 @@ install_arch_packages() {
     the_silver_searcher
     trash-cli
     tree
+    #
     zsh
     neovim
     tmux
@@ -102,6 +106,7 @@ install_arch_packages() {
     fastfetch
     lazygit
     git-delta
+    #
     cmake
     make
     ninja
@@ -111,8 +116,10 @@ install_arch_packages() {
     lldb
     bear
     podman
+    #
     chezmoi
     yazi
+    #
     nodejs
     npm
   )
@@ -126,10 +133,12 @@ install_arch_packages() {
   )
 
   local -a arch_personal_hosts=(
+    # [hostlist]
     # Example: arch-main
   )
 
   local -a arch_work_hosts=(
+    # [hostlist]
     # Example: arch-work
   )
 
@@ -145,6 +154,10 @@ install_arch_packages() {
   install_yay
 }
 
+
+#============================================================================
+# Install Mac packages.
+#============================================================================
 install_macos_packages() {
   info 'Installing macOS Homebrew packages...'
 
@@ -163,21 +176,13 @@ install_macos_packages() {
     the_silver_searcher
     trash
     tree
-    neovim
-    tmux
     fzf
     ripgrep
     htop
     fastfetch
     lazygit
     git-delta
-    cmake
-    ninja
-    llvm
-    bear
-    podman
     chezmoi
-    yazi
     node
   )
 
@@ -206,12 +211,14 @@ install_macos_packages() {
   )
 
   local -a darwin_personal_hosts=(
+    # [hostlist]
     # Example: Alex-MacBook-Pro
     # Example: Mac-mini
   )
 
   local -a darwin_work_hosts=(
-    # Example: company-mbp
+    # [hostlist]
+    # Example: company-mbp 
   )
 
   local -a casks=("${darwin_casks_common[@]}")
@@ -229,15 +236,15 @@ install_macos_packages() {
 
   cat <<'NOTES'
 [manual] macOS items not auto-installed here:
-  - v2rayN: upstream now ships macOS builds, but there is no current official `v2rayn` Homebrew cask in this script.
-  - filezilla: I left this out because I could not confirm a current official Homebrew cask.
-  - v2ray-unofficial and v2rayu both exist as Homebrew casks, but both are deprecated.
-  - qBittorrent Enhanced is installed only on hosts listed in darwin_personal_hosts.
+  - v2rayN: https://github.com/2dust/v2rayN/releases
+  - filezilla: https://filezilla-project.org/download.php?platform=macos-arm64
   - OrbStack needs you to open the app once to finish setup.
-  - podman on macOS usually still needs: podman machine init
 NOTES
 }
 
+#============================================================================
+# Install global npm packages.
+#============================================================================
 install_npm_globals() {
   if ! have npm; then
     warn 'npm not found; skipping global npm packages'

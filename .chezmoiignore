@@ -1,6 +1,8 @@
 === chezmoi ===
-install.sh
-run_after_apply.sh
+*.sh
+*.tmpl
+.git/
+.chezmoiignore
 
 === neovim 自动生成文件 ===
 .config/nvim/lazy-lock.json
