@@ -1,23 +1,29 @@
 [user]
-{{- if or (eq .chezmoi.hostname "your-work-mac") (eq .chezmoi.hostname "your-work-arch") }}
-	name = alex
-	email = you@company.com
+{{- if eq .role "work" }}
+  name = alex
+  email = you@company.com
 {{- else }}
-	name = alex
-	email = thealbertmak@gmail.com
+  name = alex
+  email = thealbertmak@gmail.com
 {{- end }}
+
 [init]
-	defaultBranch = main
+  defaultBranch = main
+
 [core]
-	editor = nvim
+  editor = nvim
+
 [pull]
-	rebase = false
+  rebase = false
+
 {{- if eq .chezmoi.os "darwin" }}
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
 {{- end }}
+
 [delta]
-	navigate = true
-	light = false
+  navigate = true
+  light = false
+
 [interactive]
-	diffFilter = delta --color-only
+  diffFilter = delta --color-only

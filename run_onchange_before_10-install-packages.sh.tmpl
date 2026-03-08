@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+ROLE="{{ .role }}"
+
 info() {
   printf '[info] %s\n' "$*"
 }
@@ -9,25 +11,6 @@ warn() {
 }
 have() {
   command -v "$1" >/dev/null 2>&1
-}
-
-machine_name() {
-  if [[ "$(uname -s)" == 'Darwin' ]]; then
-    scutil --get ComputerName 2>/dev/null || hostname -s
-  else
-    hostnamectl --static 2>/dev/null || hostname -s
-  fi
-}
-
-
-in_list() {
-  local needle="$1"
-  shift || true
-  local item
-  for item in "$@"; do
-    [[ "$item" == "$needle" ]] && return 0
-  done
-  return 1
 }
 
 brew_install_formulae() {
@@ -132,21 +115,11 @@ install_arch_packages() {
     # Add work-machine Arch packages here.
   )
 
-  local -a arch_personal_hosts=(
-    # [hostlist]
-    # Example: arch-main
-  )
-
-  local -a arch_work_hosts=(
-    # [hostlist]
-    # Example: arch-work
-  )
-
-  if in_list "$MACHINE_NAME" "${arch_personal_hosts[@]}"; then
+  if [[ "$ROLE" == "personal" ]]; then
     pacman_packages+=("${arch_personal_extra[@]}")
   fi
 
-  if in_list "$MACHINE_NAME" "${arch_work_hosts[@]}"; then
+  if [[ "$ROLE" == "work" ]]; then
     pacman_packages+=("${arch_work_extra[@]}")
   fi
 
@@ -172,8 +145,7 @@ install_macos_packages() {
   local -a brew_formulae=(
     git
     curl
-    gnupg
-    the_silver_searcher
+    gnupg the_silver_searcher
     trash
     tree
     fzf
@@ -210,24 +182,13 @@ install_macos_packages() {
     # Add work-only casks here.
   )
 
-  local -a darwin_personal_hosts=(
-    # [hostlist]
-    # Example: Alex-MacBook-Pro
-    # Example: Mac-mini
-  )
-
-  local -a darwin_work_hosts=(
-    # [hostlist]
-    # Example: company-mbp 
-  )
-
   local -a casks=("${darwin_casks_common[@]}")
 
-  if in_list "$MACHINE_NAME" "${darwin_personal_hosts[@]}"; then
+  if [[ "$ROLE" == "personal" ]]; then
     casks+=("${darwin_casks_personal[@]}")
   fi
 
-  if in_list "$MACHINE_NAME" "${darwin_work_hosts[@]}"; then
+  if [[ "$ROLE" == "work" ]]; then
     casks+=("${darwin_casks_work[@]}")
   fi
 
@@ -275,16 +236,12 @@ install_npm_globals() {
 }
 
 main() {
-  MACHINE_NAME="$(machine_name)"
-  info "Detected machine: ${MACHINE_NAME}"
-
   case "$(uname -s)" in
     Darwin)
       install_macos_packages
       ;;
     Linux)
       if [[ -r /etc/os-release ]]; then
-        # shellcheck disable=SC1091
         . /etc/os-release
       fi
       if [[ "${ID:-}" == 'arch' ]]; then

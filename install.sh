@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 # =============================================================================
-# usage: sh -c "$(curl -fsSL https://raw.githubusercontent.com/alexm915/dotfiles/main/install.sh)"
+# usage:
+# bash -c "$(curl -fsSL https://raw.githubusercontent.com/alexm915/dotfiles/main/install.sh)"
 # =============================================================================
 
 set -euo pipefail
 
 REPO_URL="${CHEZMOI_REPO_URL:-https://github.com/alexm915/dotfiles.git}"
-# or git repo:
-# REPO_URL=git@github.com:alexm915/dotfiles.git ./install.sh
 
 log() {
     printf '[%s] %s\n' "$1" "$2"
@@ -20,6 +19,11 @@ setup_homebrew_shellenv() {
 
     if [ -x /opt/homebrew/bin/brew ]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
+        return 0
+    fi
+
+    if [ -x /usr/local/bin/brew ]; then
+        eval "$(/usr/local/bin/brew shellenv)"
         return 0
     fi
 
@@ -75,7 +79,7 @@ main() {
 
     if [ -d "${HOME}/.local/share/chezmoi/.git" ]; then
         log info "chezmoi source already exists; applying"
-        chezmoi apply
+        chezmoi update
     else
         log info "initializing chezmoi from ${REPO_URL}"
         chezmoi init --apply "${REPO_URL}"
@@ -84,3 +88,5 @@ main() {
     log info "done"
     log info "machine-specific values live in ~/.config/chezmoi/chezmoi.toml"
 }
+
+main "$@"
