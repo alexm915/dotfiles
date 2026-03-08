@@ -1,0 +1,299 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+info() {
+  printf '[info] %s\n' "$*"
+}
+warn() {
+  printf '[warn] %s\n' "$*" >&2
+}
+have() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+machine_name() {
+  if [[ "$(uname -s)" == 'Darwin' ]]; then
+    scutil --get ComputerName 2>/dev/null || hostname -s
+  else
+    hostnamectl --static 2>/dev/null || hostname -s
+  fi
+}
+
+
+in_list() {
+  local needle="$1"
+  shift || true
+  local item
+  for item in "$@"; do
+    [[ "$item" == "$needle" ]] && return 0
+  done
+  return 1
+}
+
+brew_install_formulae() {
+  local formula
+  local failed=()
+  for formula in "$@"; do
+    if brew list --formula "$formula" >/dev/null 2>&1; then
+      continue
+    fi
+    if ! brew install "$formula"; then
+      failed+=("$formula")
+    fi
+  done
+
+  if (( ${#failed[@]} > 0 )); then
+    warn "Failed brew formulae: ${failed[*]}"
+  fi
+}
+
+brew_install_casks() {
+  local cask
+  local failed=()
+  for cask in "$@"; do
+    if brew list --cask "$cask" >/dev/null 2>&1; then
+      continue
+    fi
+    if ! brew install --cask "$cask"; then
+      failed+=("$cask")
+    fi
+  done
+
+  if (( ${#failed[@]} > 0 )); then
+    warn "Failed brew casks: ${failed[*]}"
+  fi
+}
+
+install_yay() {
+  if have yay; then
+    return 0
+  fi
+
+  info 'Installing yay from AUR...'
+  mkdir -p "${HOME}/tmp"
+  rm -rf "${HOME}/tmp/yay"
+  git clone https://aur.archlinux.org/yay.git "${HOME}/tmp/yay"
+  pushd "${HOME}/tmp/yay" >/dev/null
+  makepkg -sic --noconfirm
+  popd >/dev/null
+  rm -rf "${HOME}/tmp/yay"
+}
+
+install_arch_packages() {
+  info 'Installing Arch Linux packages...'
+  sudo pacman -Syu --noconfirm
+
+  local -a pacman_packages=(
+    man-db
+    base-devel
+    curl
+    git
+    zip
+    unzip
+    the_silver_searcher
+    trash-cli
+    tree
+    zsh
+    neovim
+    tmux
+    fzf
+    ripgrep
+    htop
+    fastfetch
+    lazygit
+    git-delta
+    cmake
+    make
+    ninja
+    gdb
+    clang
+    llvm
+    lldb
+    bear
+    podman
+    chezmoi
+    yazi
+    nodejs
+    npm
+  )
+
+  local -a arch_personal_extra=(
+    # Add personal-machine Arch packages here.
+  )
+
+  local -a arch_work_extra=(
+    # Add work-machine Arch packages here.
+  )
+
+  local -a arch_personal_hosts=(
+    # Example: arch-main
+  )
+
+  local -a arch_work_hosts=(
+    # Example: arch-work
+  )
+
+  if in_list "$MACHINE_NAME" "${arch_personal_hosts[@]}"; then
+    pacman_packages+=("${arch_personal_extra[@]}")
+  fi
+
+  if in_list "$MACHINE_NAME" "${arch_work_hosts[@]}"; then
+    pacman_packages+=("${arch_work_extra[@]}")
+  fi
+
+  sudo pacman -S --needed --noconfirm "${pacman_packages[@]}"
+  install_yay
+}
+
+install_macos_packages() {
+  info 'Installing macOS Homebrew packages...'
+
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+
+  brew update
+
+  local -a brew_formulae=(
+    git
+    curl
+    gnupg
+    the_silver_searcher
+    trash
+    tree
+    neovim
+    tmux
+    fzf
+    ripgrep
+    htop
+    fastfetch
+    lazygit
+    git-delta
+    cmake
+    ninja
+    llvm
+    bear
+    podman
+    chezmoi
+    yazi
+    node
+  )
+
+  local -a darwin_casks_common=(
+    alfred
+    alacritty
+    brave-browser
+    calibre
+    dbeaver-community
+    mp3tag
+    visual-studio-code
+    orbstack
+    pdf-expert
+    vlc
+    zoom
+    cryptomator
+    freefilesync
+  )
+
+  local -a darwin_casks_personal=(
+    c0re100-qbittorrent
+  )
+
+  local -a darwin_casks_work=(
+    # Add work-only casks here.
+  )
+
+  local -a darwin_personal_hosts=(
+    # Example: Alex-MacBook-Pro
+    # Example: Mac-mini
+  )
+
+  local -a darwin_work_hosts=(
+    # Example: company-mbp
+  )
+
+  local -a casks=("${darwin_casks_common[@]}")
+
+  if in_list "$MACHINE_NAME" "${darwin_personal_hosts[@]}"; then
+    casks+=("${darwin_casks_personal[@]}")
+  fi
+
+  if in_list "$MACHINE_NAME" "${darwin_work_hosts[@]}"; then
+    casks+=("${darwin_casks_work[@]}")
+  fi
+
+  brew_install_formulae "${brew_formulae[@]}"
+  brew_install_casks "${casks[@]}"
+
+  cat <<'NOTES'
+[manual] macOS items not auto-installed here:
+  - v2rayN: upstream now ships macOS builds, but there is no current official `v2rayn` Homebrew cask in this script.
+  - filezilla: I left this out because I could not confirm a current official Homebrew cask.
+  - v2ray-unofficial and v2rayu both exist as Homebrew casks, but both are deprecated.
+  - qBittorrent Enhanced is installed only on hosts listed in darwin_personal_hosts.
+  - OrbStack needs you to open the app once to finish setup.
+  - podman on macOS usually still needs: podman machine init
+NOTES
+}
+
+install_npm_globals() {
+  if ! have npm; then
+    warn 'npm not found; skipping global npm packages'
+    return 0
+  fi
+
+  local -a npm_packages=(
+    @anthropic-ai/claude-code
+  )
+
+  local npm_prefix
+  npm_prefix="$(npm prefix -g 2>/dev/null || true)"
+
+  local pkg
+  for pkg in "${npm_packages[@]}"; do
+    if npm list -g "$pkg" >/dev/null 2>&1; then
+      continue
+    fi
+
+    if [[ -n "$npm_prefix" && -w "$npm_prefix" ]]; then
+      npm install -g "$pkg"
+    elif have sudo; then
+      sudo npm install -g "$pkg"
+    else
+      warn "Cannot install ${pkg}: npm global prefix is not writable (${npm_prefix:-unknown})"
+    fi
+  done
+}
+
+main() {
+  MACHINE_NAME="$(machine_name)"
+  info "Detected machine: ${MACHINE_NAME}"
+
+  case "$(uname -s)" in
+    Darwin)
+      install_macos_packages
+      ;;
+    Linux)
+      if [[ -r /etc/os-release ]]; then
+        # shellcheck disable=SC1091
+        . /etc/os-release
+      fi
+      if [[ "${ID:-}" == 'arch' ]]; then
+        install_arch_packages
+      else
+        warn "Unsupported Linux distribution: ${ID:-unknown}"
+        exit 1
+      fi
+      ;;
+    *)
+      warn "Unsupported OS: $(uname -s)"
+      exit 1
+      ;;
+  esac
+
+  install_npm_globals
+}
+
+main "$@"
