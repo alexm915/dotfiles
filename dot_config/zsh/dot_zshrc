@@ -81,7 +81,7 @@ alias cdw="cd ~/files/work/"
 
 
 # devbox
-# 0-monitor
+#monitor
 alias lpm="lsipc -m" #查看共享内存
 alias lps="lsipc -s" #查看信号量
 #查看进程
@@ -101,19 +101,29 @@ function psg {
     ps -fp $pids
 }
 
+# podman
+alias pm="podman"
+alias pms="podman search"
+alias pmp="podman pull"
+alias pmr="podman run"
+alias pmri="podman run -it"
+alias pme="podman exec -it"
 
+alias pmps="podman ps"
+alias pmpsa="podman ps -a"
+alias pmc="podman system prune"
 
-# 0-zsh
+# zsh
 alias mz="nvim ~/.config/zsh/.zshrc"
 alias az="chezmoi add ~/.config/zsh/.zshrc"
 alias sz="exec zsh"
 alias mzm="nvim ~/.config/zsh/.zimrc"
 alias azm="chezmoi add ~/.config/zsh/.zimrc"
-# 1-tmux
+# tmux
 alias mt="nvim ~/.config/tmux/tmux.conf"
 alias at="chezmoi add ~/.config/tmux/tmux.conf"
 alias tls="tmux ls"
-# 2-neovim
+# neovim
 alias mvi="nvim ~/.config/nvim/init.lua"
 alias avi="chezmoi add ~/.config/nvim/init.lua"
 alias mvl="nvim ~/.config/nvim/lua/config/lazy.lua"
@@ -131,10 +141,10 @@ alias avptreest="chezmoi add ~/.config/nvim/lua/plugins/treesitter.lua"
 alias avp="chezmoi add ~/.config/nvim/lua/plugins"
 
 
-# 3-yazi
+# yazi
 alias my="nvim ~/.config/yazi/yazi.toml"
 alias ay="chezmoi add ~/.config/yazi"
-# 4-lazygit
+# lazygit
 alias mg="nvim ~/.config/lazygit/config.yml"
 alias ag="chezmoi add ~/.config/lazygit/config.yml"
 
