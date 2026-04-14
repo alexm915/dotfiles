@@ -6,7 +6,11 @@ return{
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
-        "L3MON4D3/LuaSnip",
+        {
+            "L3MON4D3/LuaSnip",
+            version = "v2.*",
+            build = "make install_jsregexp",
+        },
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-cmdline",
     },
@@ -30,11 +34,11 @@ return{
             mapping =cmp.mapping.preset.insert({
                 ["<C-n>"] = cmp.mapping.select_next_item(),
                 ["<C-p>"] = cmp.mapping.select_prev_item(),
-                ["<C-b>"] = cmp.mapping.scroll_docs(-4), -- 向上滚动文档
-                ["<C-f>"] = cmp.mapping.scroll_docs(4), -- 向下滚动文档
-                ["<C-Space>"] = cmp.mapping.complete(), -- 手动触发补全
-                ["<C-e>"] = cmp.mapping.abort(), -- 取消补全
-                ["<CR>"] = cmp.mapping.confirm({ select = true }), -- 确认补全
+                ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+                ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                ["<C-Space>"] = cmp.mapping.complete(),
+                ["<C-e>"] = cmp.mapping.abort(),
+                ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
@@ -94,7 +98,7 @@ return{
             },
         })
 
-        --命令行补全
+        -- command completion
         cmp.setup.cmdline(":",{
             mapping =cmp.mapping.preset.cmdline({
                 ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -109,7 +113,7 @@ return{
             }),
         })
 
-        --搜索补全
+        -- search completion
         cmp.setup.cmdline("/",{
             mapping =cmp.mapping.preset.cmdline(),
             sources ={

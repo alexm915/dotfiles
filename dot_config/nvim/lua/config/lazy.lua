@@ -1,6 +1,7 @@
---拼接出plugin manager(lazy-vim)的安装路径
+-- to make plugin manager lazy.nvim installation path
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
---如果不存在lazy-vim,则下载最新稳定版放到lazypath
+
+-- if lazy.nvim not exist, install the stable verion into path
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git", "clone", "--filter=blob:none",
@@ -8,11 +9,16 @@ if not vim.loop.fs_stat(lazypath) then
         "--branch=stable", lazypath,
     })
 end
---将lazypath链接到neovim
+
+-- link lazypath to neovim runtimepath
 vim.opt.rtp:prepend(lazypath)
 
---让lazy-vim到"plugin" directory中找各个plugin config
+-- tell nvim to find plugins config
 require("lazy").setup("plugins",{
     install = {missing=true},
     checker = {enabled=true},
+
+    rocks = {
+        enabled = false,
+    },
 })
