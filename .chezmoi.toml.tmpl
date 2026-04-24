@@ -1,5 +1,0 @@
-{{- $roleChoices := list "personal" "work" -}}
-{{- $role := promptChoiceOnce . "role" "Select machine role" $roleChoices "personal" -}}
-
-[data]
-role = {{ $role | quote }}

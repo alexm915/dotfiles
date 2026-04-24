@@ -124,23 +124,8 @@ alias mt="nvim ~/.config/tmux/tmux.conf"
 alias at="chezmoi add ~/.config/tmux/tmux.conf"
 alias tls="tmux ls"
 # neovim
-alias mvi="nvim ~/.config/nvim/init.lua"
-alias avi="chezmoi add ~/.config/nvim/init.lua"
-alias mvl="nvim ~/.config/nvim/lua/config/lazy.lua"
-alias avl="chezmoi add ~/.config/nvim/lua/config/lazy.lua"
-alias mvptheme="nvim ~/.config/nvim/lua/plugins/colorscheme.lua"
-alias avptheme="chezmoi add ~/.config/nvim/lua/plugins/colorscheme.lua"
-alias mvpline="nvim ~/.config/nvim/lua/plugins/lualine.lua"
-alias avpline="chezmoi add ~/.config/nvim/lua/plugins/lualine.lua"
-alias mvpcmp="nvim add ~/.config/nvim/lua/plugins/nvim-cmp.lua"
-alias avpcmp="chezmoi add ~/.config/nvim/lua/plugins/nvim-cmp.lua"
-alias mvptree="nvim ~/.config/nvim/lua/plugins/nvim-tree.lua"
-alias avptree="chezmoi add ~/.config/nvim/lua/plugins/nvim-tree.lua"
-alias mvptreest="nvim ~/.config/nvim/lua/plugins/treesitter.lua"
-alias avptreest="chezmoi add ~/.config/nvim/lua/plugins/treesitter.lua"
-alias avp="chezmoi add ~/.config/nvim/lua/plugins"
-
-
+alias mn="nvim ~/.config/nvim/init.lua"
+alias an="chezmoi add ~/.config/nvim/init.lua"
 # yazi
 alias my="nvim ~/.config/yazi/yazi.toml"
 alias ay="chezmoi add ~/.config/yazi"
@@ -167,6 +152,8 @@ function tm {
         tmux attach -t "$1" || tmux new-session -s "$1"
     fi
 }
+
+
 
 # vim and automatically tmux
 function v {
