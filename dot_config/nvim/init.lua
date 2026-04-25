@@ -1,6 +1,21 @@
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("habamax")
+-- vim.cmd.colorscheme("habamax")
+-- ################################################
+-- my own theme install test
+-- ################################################
+vim.pack.add({
+	"https://github.com/Mofiqul/dracula.nvim",
+})
+vim.cmd("packadd dracula.nvim")
 
+require("dracula").setup({
+	transparent_bg = true,
+	italic_comment = true,
+})
+
+vim.cmd.colorscheme("dracula")
+
+-- ################################################
 local function set_transparent() -- set UI component to transparent
 	local groups = {
 		"Normal",
@@ -323,9 +338,8 @@ vim.keymap.set("n", "<leader>td", function()
 	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { desc = "Toggle diagnostics" })
 
-
 -- my own customized keymaps
-vim.keymap.set("n", "S",":w<CR>", { desc = "Save file" })
+vim.keymap.set("n", "S", ":w<CR>", { desc = "Save file" })
 vim.keymap.set("n", "Q", ":q<CR>", { desc = "Quit" })
 -- vim.keymap.set("n", "J", "<C-d>zz", { desc = "Half page down (centered)" })
 -- vim.keymap.set("n", "K", "<C-u>zz", { desc = "Half page up (centered)" })
@@ -338,10 +352,6 @@ vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 -- vim.keymap.set('n', 'tl', ':+tabnext<CR>', {noremap = true, silent =true, desc='跳到右边的标签页'})
 
 -- vim.keymap.set('n', '<LEADER>sc', ':set spell!<CR>', {noremap = true, silent =true, desc='spell check'})
-
-
-
-
 
 -- ============================================================================
 -- AUTOCMDS
