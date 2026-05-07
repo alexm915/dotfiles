@@ -3,7 +3,7 @@ set -e
 
 sudo pacman -Syu --noconfirm
 # ====== basic tools ======
-sudo pacman -S --needed --noconfirm base-devel man-db curl git zip unzip trash-cli tree
+sudo pacman -S --needed --noconfirm base-devel tldr curl git zip unzip trash-cli tree
 sudo pacman -S --needed --noconfirm fzf ripgrep fd the_silver_searcher
 sudo pacman -S --needed --noconfirm chezmoi fastfetch
 #yay

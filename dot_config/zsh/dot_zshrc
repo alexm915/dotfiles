@@ -78,7 +78,7 @@ alias md='mkdir -p'
 alias rm='echo "Use tp (trash-put) instead."; false'
 alias tp="trash-put"
 alias cdw="cd ~/files/work/"
-
+alias man='tldr'
 
 # devbox
 #monitor
