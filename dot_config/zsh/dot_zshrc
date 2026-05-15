@@ -102,16 +102,13 @@ function psg {
 }
 
 # podman
-alias pm="podman"
-alias pms="podman search"
-alias pmp="podman pull"
-alias pmr="podman run"
-alias pmri="podman run -it"
-alias pme="podman exec -it"
-
-alias pmps="podman ps"
-alias pmpsa="podman ps -a"
-alias pmc="podman system prune"
+alias pd="podman"
+alias pds="podman search"
+alias pdp="podman pull"
+alias pdr="podman run"
+alias pdri="podman run -it"
+alias pde="podman exec -it"
+alias pdc="podman system prune"
 
 # zsh
 alias mz="nvim ~/.config/zsh/.zshrc"
