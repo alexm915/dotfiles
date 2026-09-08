@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-DOTFILES="$HOME/alexmak/dotfiles"
+echo "[link.sh] Creating symbolic links..."
 
-echo "creating symbolic links..."
+DOTFILES="$HOME/alexmak/dotfiles"
 ## ============================== ##
 ## ========  general  =========== ##
 ## ============================== ##
@@ -55,4 +55,4 @@ if [ "$(uname -s)" = "Darwin" ]; then
   ln -sfn "$DOTFILES/mpv/portable_config" "$HOME/.config/mpv"
 fi
 
-echo "done!"
+echo "[link.sh] Finished."

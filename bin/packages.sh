@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-echo "installing packages..."
+echo "[packages.sh] Installing packages..."
 
 if [ "$(uname -s)" = "Darwin" ]; then
   #========================
@@ -50,4 +50,4 @@ else
   )
 fi
 
-echo "done!"
+echo "[packages.sh] Finished."

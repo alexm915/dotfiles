@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-echo "config system..."
+echo "[configsys.sh] Config system..."
 
 if [ "$SHELL" != "$(which zsh)" ]; then
   sudo chsh -s "$(which zsh)" "$USER" || true
@@ -15,4 +15,4 @@ git config --global user.email "113433667+victoryfeel@users.noreply.github.com"
 git config --global init.defaultBranch main
 # systemctl --user enable --now podman.socket
 
-echo "done!"
+echo "[configsys.sh] Finished."
