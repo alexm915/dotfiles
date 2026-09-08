@@ -4,7 +4,7 @@ set -e
 echo "config system..."
 
 if [ "$SHELL" != "$(which zsh)" ]; then
-  chsh -s "$(which zsh)" || true
+  sudo chsh -s "$(which zsh)" "$USER" || true
 fi
 mkdir -p "$HOME/alexmak/learn"
 mkdir -p "$HOME/alexmak/ongo"
